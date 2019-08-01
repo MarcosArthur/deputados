@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        .card-item {
+            width: 35%;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <div>
+            <img src="" alt="" class="img">
+            <span class="name"></span>
+        </div> -->
+    </div>
+
+
+    <script>
+        fetch('https://dadosabertos.camara.leg.br/api/v2/deputados',{
+            headers: {
+                'Accept': "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+
+            let templete = " ";
+            response.dados.forEach(e => {
+                templete += `
+                <div class="card-item">
+                    <img src="${e.urlFoto}" alt="" class="img">
+                    <span class="name">${e.nome}</span>
+                    <button data-id="${e.id}">Gastos</button>
+                </div>
+                `;
+            })
+
+            document.querySelector('.container').innerHTML = templete;
+            button();
+        })
+
+    function button() {
+        let button = document.querySelectorAll('button');
+
+        button.forEach(e => {
+            e.addEventListener('click', event => {
+                console.log('click')
+                let id = event.target.dataset.id;
+
+                fetch(`https://dadosabertos.camara.leg.br/api/v2/deputados/${id}/despesas`, {
+                    headers: {
+                        'Accept': "application/json"
+                    }
+                })
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                })
+            });
+        })
+    }
+    </script>
+</body>
+</html>
