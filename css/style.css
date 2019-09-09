@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+* { 
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Rubik', sans-serif;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+body {
+    background: #bdc3c7;
+    font-family: 'Rubik', sans-serif;
+}
+
+.container {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container__card {
+    width: 50%;
+    height: 200px;
+    padding: 10px;
+    border-radius: 4px;
+    background: white;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+.container__card + .container__card {
+    margin-top: 10px;
+}
+
+.card__image {
+    border-radius: 4px;
+    height: 100%;
+}
+
+.card__information {
+    display: grid;
+    width: 100%;
+
+    grid-template-columns: 1fr;
+    grid-row-gap: 5px;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    color: white;
+    background: #AA88FF;
+    border-radius: 4px;
+    transition: all .2s;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    justify-self: end;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+
+.modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100vh);
+    transition: .2s;
+}
+
+.modal.active {
+    transform: translateY(0px);
+}
+
+.information {
+    width: 40%;
+    height: 80vh;
+    background: white;
+    border-radius: 4px;
+    padding: 15px;
+
+}
+
+.load {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #282a2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.load__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.load__item {
+   width: 100px;
+   height: 100px;
+    border-radius: 50%;
+    border-top: solid 3px white;
+    border-left: solid 3px white;
+    border-bottom: solid 3px white;
+    animation: load .4s linear  infinite;
+}
+
+.load__name {
+    margin-top: 10px;
+    color: white;
+    animation: name .6s  infinite;
+}
+
+@keyframes load {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes name {
+    to {
+        opacity: 0;
+    }
+}
