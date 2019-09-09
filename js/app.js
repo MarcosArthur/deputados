@@ -2,12 +2,19 @@
 
 let load = document.querySelector('.load');
 
+function handleErrors(response) {
+   if (!response.ok) {
+       throw Error(response.statusText);
+   }
+   return response;
+}
+
 fetch('https://dadosabertos.camara.leg.br/api/v2/deputados', {
    headers: {
       'Accept': "application/json"
    }
 })
-   .then(response => response.ok())
+   .then(handleErrors)
    .then(response => response.json())
    .then(response => {
       // let load = document.querySelector('.load');
