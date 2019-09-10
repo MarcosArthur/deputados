@@ -58,7 +58,7 @@ function button() {
             .then(response => response.json())
             .then(response => {
                console.log(response)
-               // if (response) modal.classList.add('active');
+                if (response) modal.classList.add('active');
                let valor  = 0;
                response.dados.forEach(e => {
                   valor = valor + e.valorDocumento;
