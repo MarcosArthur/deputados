@@ -92,8 +92,10 @@ body {
 }
 
 .information {
-    width: 40%;
-    height: 80vh;
+    width: 95%;
+    height: 90vh;
+    overflow-y: scroll;
+    /* min-height: 80vh; */
     background: white;
     border-radius: 4px;
     padding: 15px;
@@ -144,4 +146,24 @@ body {
     to {
         opacity: 0;
     }
+}
+
+.table-info {
+    width: 100%;
+    border: solid 1px red;
+}
+
+tr {
+    display: grid;
+
+    border: solid 1px red;
+    /* justify-content: space-around; */
+    text-align: center;
+    grid-template-columns: 1fr auto auto 1fr auto; 
+    grid-gap:20px; 
+    grid-auto-flow: dense
+}
+
+td {
+    padding: 5px;
 }
