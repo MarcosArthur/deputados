@@ -1,20 +1,17 @@
-
-
-
 let load = document.querySelector('.load');
 
 function handleErrors(response) {
    if (!response.ok) {
-       throw Error(response.statusText);
+      throw Error(response.statusText);
    }
    return response;
 }
 
 fetch('https://dadosabertos.camara.leg.br/api/v2/deputados', {
-   headers: {
-      'Accept': "application/json"
-   }
-})
+      headers: {
+         'Accept': "application/json"
+      }
+   })
    .then(handleErrors)
    .then(response => response.json())
    .then(response => {
@@ -52,10 +49,10 @@ function button() {
          let id = event.target.dataset.id;
 
          fetch(`https://dadosabertos.camara.leg.br/api/v2/deputados/${id}/despesas`, {
-            headers: {
-               'Accept': "application/json"
-            }
-         })
+               headers: {
+                  'Accept': "application/json"
+               }
+            })
             .then(response => response.json())
             .then(response => {
                console.log(response)
@@ -63,33 +60,33 @@ function button() {
                let mes = [];
                let gastos = [];
 
-               let table = " ";
+               let table = `                 <table class="table-info">
+               <thead>
+                  <tr class="table-header">
+                     <td>
+                        Tipo Despesa
+                     </td>
+                     <td>
+                        Ano
+                     </td>
+                     <td>
+                       Mês
+                     </td>
+                     <td>
+                        Nome Fornecedor
+                     </td>
+                     <td>
+                        Valor
+                     </td>
+                  </tr>
+               </thead>  <tbody class="table-body"> `;
 
                response.dados.forEach(e => {
                   mes.push(e.mes);
                   gastos.push(e.valorLiquido);
-                  table+= `
-                     <table class="table-info" c >
-                        <thead>
-                           <tr>
-                              <td>
-                                 Tipo Despesa
-                              </td>
-                              <td>
-                                 Ano
-                              </td>
-                              <td>
-                                Mês
-                              </td>
-                              <td>
-                                 Nome Fornecedor
-                              </td>
-                              <td>
-                                 Valor
-                              </td>
-                           </tr>
-                        </thead>
-                        <tbody>
+                  table += `
+    
+                      
                            <tr>
                               <td>
                                  ${e.tipoDespesa}
@@ -111,40 +108,41 @@ function button() {
                               </td>
 
                            </tr>
-                        </tbody>
-                     <table>
+                        
+                    
                   `;
                })
 
+               table += "</tbody></table>";
+
                var ctx = document.getElementById('myChart').getContext('2d');
                var chart = new Chart(ctx, {
-                   
-                   type: 'line',
-               
-                   
-                   data: {
-                       labels:mes,
-                       datasets: [{
-                           label: 'Gastos Deputado(a)',
-                           backgroundColor: 'rgb(255, 99, 132)',
-                           borderColor: 'red',
-                           data: gastos
-                       }]
-                   },
-               
-                   options: {
-                    }
+
+                  type: 'line',
+
+
+                  data: {
+                     labels: mes,
+                     datasets: [{
+                        label: 'Gastos Deputado(a)',
+                        backgroundColor: '#AA88FF',
+                        borderColor: '#AA88FF',
+                        data: gastos
+                     }]
+                  },
+
+                  options: {}
                });
 
 
                document.querySelector('.table-mount').innerHTML = table;
-               
+
             })
       });
    })
 }
 
 
-document.querySelector('.close').addEventListener('click', function() {
+document.querySelector('.close').addEventListener('click', function () {
    document.querySelector('.modal').classList.remove('active');
 })
