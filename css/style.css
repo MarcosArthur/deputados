@@ -85,7 +85,7 @@ body {
     justify-content: center;
     transform: translateY(-100vh);
     transition: .2s;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .modal.active {
